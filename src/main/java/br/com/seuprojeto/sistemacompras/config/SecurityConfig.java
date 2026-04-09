@@ -35,11 +35,13 @@ public class SecurityConfig {
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers("/api/auth/register").permitAll()
+                .requestMatchers("/api/auth/me").authenticated()
+                .requestMatchers("/api/auth/users").hasRole("ADMIN")
                 .requestMatchers("/api/auditoria/**").hasRole("ADMIN")
                 .requestMatchers("/api/migracao/**").hasRole("ADMIN")
                 .requestMatchers("/api/bi/**").hasRole("ADMIN")
-                .anyRequest().permitAll()
+                .anyRequest().authenticated()
             )
             .httpBasic(Customizer.withDefaults());
 
