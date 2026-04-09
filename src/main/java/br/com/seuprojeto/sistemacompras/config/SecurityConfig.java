@@ -45,7 +45,9 @@ public class SecurityConfig {
                     .requestMatchers("/api/migracao/**").hasRole("ADMIN")
                     .requestMatchers("/api/bi/**").hasRole("ADMIN")
 
-                    .anyRequest().authenticated()
+                    .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .anyRequest().permitAll())
                 )
                 .httpBasic(Customizer.withDefaults());
 
