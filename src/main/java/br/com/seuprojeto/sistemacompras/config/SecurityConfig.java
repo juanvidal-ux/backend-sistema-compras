@@ -30,30 +30,22 @@ public class SecurityConfig {
     private PasswordEncoder passwordEncoder;
 
     @Bean
-        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-            http
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/api/auth/me").authenticated()
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+            .csrf(csrf -> csrf.disable())
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers("/api/auditoria/**").hasRole("ADMIN")
+                .requestMatchers("/api/migracao/**").hasRole("ADMIN")
+                .requestMatchers("/api/bi/**").hasRole("ADMIN")
+                .anyRequest().permitAll()
+            )
+            .httpBasic(Customizer.withDefaults());
 
-                    // --- ADICIONE ESTA LINHA AQUI ---
-                    .requestMatchers("/api/auditoria/**").hasRole("ADMIN")
-                    // --------------------------------
+        return http.build();
+    }
 
-                    .requestMatchers("/api/auth/**").hasRole("ADMIN")
-                    .requestMatchers("/api/migracao/**").hasRole("ADMIN")
-                    .requestMatchers("/api/bi/**").hasRole("ADMIN")
-
-                    .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll()
-                        .anyRequest().permitAll())
-                )
-                .httpBasic(Customizer.withDefaults());
-
-            return http.build();
-        }
-    // --- PROVEDOR DE AUTENTICAÇÃO ---
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -70,10 +62,15 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://127.0.0.1:5500", "http://localhost:5500"));
+        configuration.setAllowedOrigins(List.of(
+            "http://127.0.0.1:5500",
+            "http://localhost:5500",
+            "https://juanvidal-ux.github.io"
+        ));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
         configuration.setAllowCredentials(true);
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
