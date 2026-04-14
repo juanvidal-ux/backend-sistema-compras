@@ -1,21 +1,27 @@
 package br.com.seuprojeto.sistemacompras.dto;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class PedidoResumoDTO {
 
     private Integer id;
     private String codigoPcn;
-    private LocalDate dataEmissao;
+    private LocalDateTime dataEmissao;
     private String responsavel;
     private String tipoCompra;
     private String fornecedorNome;
     private BigDecimal totalPedido;
 
-    public PedidoResumoDTO(Integer id, String codigoPcn, LocalDate dataEmissao,
-                           String responsavel, String tipoCompra,
-                           String fornecedorNome, BigDecimal totalPedido) {
+    public PedidoResumoDTO(
+            Integer id,
+            String codigoPcn,
+            LocalDateTime dataEmissao,
+            String responsavel,
+            String tipoCompra,
+            String fornecedorNome,
+            BigDecimal totalPedido
+    ) {
         this.id = id;
         this.codigoPcn = codigoPcn;
         this.dataEmissao = dataEmissao;
@@ -25,5 +31,31 @@ public class PedidoResumoDTO {
         this.totalPedido = totalPedido;
     }
 
-    // getters
+    public Integer getId() {
+        return id;
+    }
+
+    public String getCodigoPcn() {
+        return codigoPcn;
+    }
+
+    public LocalDateTime getDataEmissao() {
+        return dataEmissao;
+    }
+
+    public String getResponsavel() {
+        return responsavel;
+    }
+
+    public String getTipoCompra() {
+        return tipoCompra;
+    }
+
+    public String getFornecedorNome() {
+        return fornecedorNome;
+    }
+
+    public BigDecimal getTotalPedido() {
+        return totalPedido;
+    }
 }
