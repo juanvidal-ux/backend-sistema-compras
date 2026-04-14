@@ -1,13 +1,13 @@
 package br.com.seuprojeto.sistemacompras.dto;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class PedidoResumoDTO {
 
     private Integer id;
     private String codigoPcn;
-    private LocalDateTime dataEmissao;
+    private LocalDate dataEmissao;
     private String responsavel;
     private String tipoCompra;
     private String fornecedorNome;
@@ -16,7 +16,7 @@ public class PedidoResumoDTO {
     public PedidoResumoDTO(
             Integer id,
             String codigoPcn,
-            LocalDateTime dataEmissao,
+            LocalDate dataEmissao,
             String responsavel,
             String tipoCompra,
             String fornecedorNome,
@@ -39,7 +39,7 @@ public class PedidoResumoDTO {
         return codigoPcn;
     }
 
-    public LocalDateTime getDataEmissao() {
+    public LocalDate getDataEmissao() {
         return dataEmissao;
     }
 
