@@ -9,6 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.transaction.annotation.Transactional;
+import br.com.seuprojeto.sistemacompras.dto.PedidoResumoDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -61,9 +62,8 @@ public class PedidoCompraController {
 
     // --- 3. Listar Todos ---
     @GetMapping
-    @Transactional
-    public List<PedidoCompra> listarPedidos() {
-        return pedidoRepository.findAllComItens(); 
+    public List<PedidoResumoDTO> listarPedidos() {
+        return pedidoRepository.listarResumo();
     }
 
     // --- 4. Buscar por ID ---
