@@ -19,18 +19,18 @@ public interface PedidoCompraRepository extends JpaRepository<PedidoCompra, Inte
     List<PedidoCompra> findAllComItens();
 
     @Query("""
-        SELECT new br.com.seuprojeto.sistemacompras.dto.PedidoResumoDTO(
-            p.id,
-            p.codigoPcn,
-            p.dataEmissao,
-            p.responsavel,
-            p.tipoCompra,
-            f.nome,
-            p.totalPedido
-        )
-        FROM PedidoCompra p
-        LEFT JOIN p.fornecedor f
-        ORDER BY p.id DESC
-    """)
-    List<PedidoResumoDTO> listarResumo();
+    SELECT new br.com.seuprojeto.sistemacompras.dto.PedidoResumoDTO(
+        p.id,
+        p.codigoPcn,
+        p.dataEmissao,
+        p.responsavel,
+        p.tipoCompra,
+        f.nome,
+        p.totalPedido
+    )
+    FROM PedidoCompra p
+    LEFT JOIN p.fornecedor f
+    ORDER BY p.id DESC
+""")
+List<PedidoResumoDTO> listarResumo();
 }
