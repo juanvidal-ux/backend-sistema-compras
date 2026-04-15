@@ -73,7 +73,7 @@ public interface ItemPedidoRepository extends JpaRepository<ItemPedido, Integer>
         )
         FROM ItemPedido i
         JOIN i.pedidoCompra p
-        WHERE i.area = :area
+        WHERE LOWER(COALESCE(i.area, '')) LIKE LOWER(CONCAT(:area, '%'))
           AND YEAR(p.dataEmissao) = :ano
         GROUP BY i.descricao, i.area
         ORDER BY COALESCE(SUM(i.valorTotal), 0) DESC
