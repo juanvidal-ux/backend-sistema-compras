@@ -24,14 +24,6 @@ public interface PedidoCompraRepository extends JpaRepository<PedidoCompra, Inte
     List<Integer> findDistinctAnos();
 
     @Query("""
-        SELECT DISTINCT p
-        FROM PedidoCompra p
-        LEFT JOIN FETCH p.itens
-        ORDER BY p.id DESC
-    """)
-    List<PedidoCompra> findAllComItens();
-
-    @Query("""
         SELECT new br.com.seuprojeto.sistemacompras.dto.PedidoResumoDTO(
             p.id,
             p.codigoPcn,
