@@ -31,31 +31,11 @@ public class PedidoResumoDTO {
         this.totalPedido = totalPedido;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public String getCodigoPcn() {
-        return codigoPcn;
-    }
-
-    public LocalDate getDataEmissao() {
-        return dataEmissao;
-    }
-
-    public String getResponsavel() {
-        return responsavel;
-    }
-
-    public String getTipoCompra() {
-        return tipoCompra;
-    }
-
-    public String getFornecedorNome() {
-        return fornecedorNome;
-    }
-
-    public BigDecimal getTotalPedido() {
-        return totalPedido;
-    }
+    public Integer getId() { return id; }
+    public String getCodigoPcn() { return codigoPcn; }
+    public LocalDate getDataEmissao() { return dataEmissao; }
+    public String getResponsavel() { return responsavel; }
+    public String getTipoCompra() { return tipoCompra; }
+    public String getFornecedorNome() { return fornecedorNome; }
+    public BigDecimal getTotalPedido() { return totalPedido; }
 }
